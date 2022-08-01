@@ -7,7 +7,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
+    // implement createState
     return MyAppState();
   }
 }
@@ -26,8 +26,19 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var questions = [
-      'Question 11111111',
-      'Question 22222222',
+      //using map
+      {
+        'questionText': 'Question 11111111',
+        'answers': ['Answer bb', 'Red', 'Green', 'White']
+      },
+      {
+        'questionText': 'Question 2222222222222',
+        'answers': ['Black', 'Red', 'White', 'Hhh']
+      },
+      {
+        'questionText': 'Question 333333333333',
+        'answers': ['Red', 'Black', 'White', 'Green']
+      },
     ];
 
     return MaterialApp(
@@ -37,10 +48,11 @@ class MyAppState extends State<MyApp> {
             ),
             body: Column(
               children: [
-                Question(questions[questionIndex]),
-                Answer(onBtnClick),
-                Answer(onBtnClick),
-                Answer(onBtnClick)
+                Question(questions[questionIndex]['questionText']),
+                ...(questions[questionIndex]['answers'] as List<String>)
+                    .map((answer) {
+                  return Answer(onBtnClick, answer);
+                }).toList()
               ],
             )));
   }
